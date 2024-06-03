@@ -13,13 +13,9 @@
       "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-fit5225a3-dev-dab7b-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
-      "function": {
-        "fit5225a3fb009279CustomMessage": {
-          "REDIRECTURL": "",
-          "EMAILSUBJECT": "",
-          "EMAILMESSAGE": "",
-          "deploymentBucketName": "amplify-fit5225a3-dev-dab7b-deployment",
-          "s3Key": "amplify-builds/fit5225a3fb009279CustomMessage-39716a66386e54486a6d-build.zip"
+      "auth": {
+        "fit5225a36836fe8b": {
+          "googleClientId": "571529030883-nh5mte6asj1ain56ej6avahptps8jkmg.apps.googleusercontent.com"
         }
       }
     }

@@ -1,50 +1,43 @@
 {
-  "auth": {},
-  "function": {
-    "fit5225a3fb009279CustomMessage": {
-      "build": true,
+  "auth": {
+    "fit5225a36836fe8b": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [],
+          "passwordPolicyMinLength": 8
+        },
+        "signupAttributes": [
+          "EMAIL",
+          "FAMILY_NAME",
+          "GIVEN_NAME"
+        ],
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
       "providerPlugin": "awscloudformation",
-      "service": "Lambda"
+      "service": "Cognito"
     }
   },
+  "function": {},
   "parameters": {
-    "AMPLIFY_function_fit5225a3fb009279CustomMessage_EMAILMESSAGE": {
+    "AMPLIFY_auth_fit5225a36836fe8b_googleClientId": {
       "usedBy": [
         {
-          "category": "function",
-          "resourceName": "fit5225a3fb009279CustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_fit5225a3fb009279CustomMessage_EMAILSUBJECT": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "fit5225a3fb009279CustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_fit5225a3fb009279CustomMessage_REDIRECTURL": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "fit5225a3fb009279CustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_fit5225a3fb009279CustomMessage_deploymentBucketName": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "fit5225a3fb009279CustomMessage"
-        }
-      ]
-    },
-    "AMPLIFY_function_fit5225a3fb009279CustomMessage_s3Key": {
-      "usedBy": [
-        {
-          "category": "function",
-          "resourceName": "fit5225a3fb009279CustomMessage"
+          "category": "auth",
+          "resourceName": "fit5225a36836fe8b"
         }
       ]
     }
