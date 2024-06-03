@@ -3,7 +3,7 @@ import { Authenticator } from "@aws-amplify/ui-vue";
 import "@aws-amplify/ui-vue/styles.css";
 import dashboard from './components/Dashboard.vue';
 import {Amplify}  from "aws-amplify";
-import awsmobile from './aws-exports';
+import awsmobile from './aws-exports.js';
 
 Amplify.configure(awsmobile);
 
