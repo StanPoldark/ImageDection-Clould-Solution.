@@ -9,7 +9,19 @@
       "UnauthRoleName": "amplify-fit5225a3-dev-dab7b-unauthRole",
       "StackName": "amplify-fit5225a3-dev-dab7b",
       "StackId": "arn:aws:cloudformation:us-east-1:042753129689:stack/amplify-fit5225a3-dev-dab7b/d235d9d0-218b-11ef-9d3b-127ec827b259",
-      "AmplifyAppId": "d3jrv6e4dy8yez"
+      "AmplifyAppId": "d3jrv6e4dy8yez",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-fit5225a3-dev-dab7b-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "function": {
+        "fit5225a3fb009279CustomMessage": {
+          "REDIRECTURL": "",
+          "EMAILSUBJECT": "",
+          "EMAILMESSAGE": "",
+          "deploymentBucketName": "amplify-fit5225a3-dev-dab7b-deployment",
+          "s3Key": "amplify-builds/fit5225a3fb009279CustomMessage-39716a66386e54486a6d-build.zip"
+        }
+      }
     }
   }
 }

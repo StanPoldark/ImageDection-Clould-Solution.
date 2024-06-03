@@ -1,1 +1,52 @@
-{}
+{
+  "auth": {},
+  "function": {
+    "fit5225a3fb009279CustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_fit5225a3fb009279CustomMessage_EMAILMESSAGE": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fit5225a3fb009279CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_fit5225a3fb009279CustomMessage_EMAILSUBJECT": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fit5225a3fb009279CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_fit5225a3fb009279CustomMessage_REDIRECTURL": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fit5225a3fb009279CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_fit5225a3fb009279CustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fit5225a3fb009279CustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_fit5225a3fb009279CustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fit5225a3fb009279CustomMessage"
+        }
+      ]
+    }
+  }
+}
