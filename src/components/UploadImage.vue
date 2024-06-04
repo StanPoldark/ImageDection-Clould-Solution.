@@ -57,7 +57,7 @@ export default {
            image: base64String  
       }, {
         headers: {
-          'Authorization': `${token}`,
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       })
