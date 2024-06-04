@@ -3,7 +3,6 @@ import { Authenticator } from "@aws-amplify/ui-vue";
 import "@aws-amplify/ui-vue/styles.css";
 import dashboard from './components/Dashboard.vue';
 import {Amplify}  from "aws-amplify";
-import axios from 'axios';
 const awsmobile = {
     "aws_project_region": "us-east-1",
     "aws_cognito_identity_pool_id": "us-east-1:4665d7a5-6347-489d-b63e-a804586c7802",
@@ -49,28 +48,6 @@ const awsmobile = {
 };
 
 Amplify.configure(awsmobile);
-// Function to fetch access token from local storage with explicit return type
-function getAccessTokenFromLocalStorage(): string | null {
-    const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.accessToken$/;
-    for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        if (key && regex.test(key)) {
-            return localStorage.getItem(key);
-        }
-    }
-    return null;
-}
-
-const accessToken = getAccessTokenFromLocalStorage();
-
-// Check if accessToken is not null before using it
-if (accessToken !== null) {
-    console.log(accessToken);
-    
-} else {
-    console.log('No access token found');
-    // Handle the absence of an access token appropriately
-}
 
 
 </script>
