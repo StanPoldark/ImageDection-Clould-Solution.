@@ -3,7 +3,6 @@
     <h1>Upload Image</h1>
     <input type="file" @change="onFileChange" />
     <button :disabled="!file" @click="uploadFile">Upload</button>
-    <button @click="testAccessToken">Test Access Token</button> <!-- 测试按钮 -->
     <div v-if="labels.length">
       <h2>Detected Labels:</h2>
       <ul>
@@ -48,15 +47,11 @@ export default {
     }
     return null;
   },
-  testAccessToken() {
-    const token = this.getAccessTokenFromLocalStorage();
-    alert('Access Token: ' + token);
-  },
   uploadFile() {
     if (!this.file) return;
     const token = this.getAccessTokenFromLocalStorage();
     this.convertImageToBase64(this.file, (base64String) => {
-      axios.post('your-api-url', { 
+      axios.post('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/upload', { 
            image: base64String  
       }, {
         headers: {
