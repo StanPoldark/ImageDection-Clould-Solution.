@@ -79,9 +79,9 @@
     ],
     "userPoolGroups": false,
     "adminQueries": false,
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://master.d3jrv6e4dy8yez.amplifyapp.com/\"],\"LogoutURLs\":[\"https://master.d3jrv6e4dy8yez.amplifyapp.com/\"]}",
     "parentStack": {
       "Ref": "AWS::StackId"
-    }
+    },
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://master.d3jrv6e4dy8yez.amplifyapp.com/\"],\"LogoutURLs\":[\"https://master.d3jrv6e4dy8yez.amplifyapp.com/\"]}"
   }
 }

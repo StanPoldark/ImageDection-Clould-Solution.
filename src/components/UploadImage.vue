@@ -38,7 +38,7 @@ export default {
     reader.readAsDataURL(file);
   },
   getAccessTokenFromLocalStorage() {
-    const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.accessToken$/;
+    const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key && regex.test(key)) {
@@ -49,7 +49,7 @@ export default {
   },
   uploadFile() {
     if (!this.file) return;
-    
+
     const token = this.getAccessTokenFromLocalStorage();
     this.convertImageToBase64(this.file, (base64String) => {
       axios.post('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/upload', { 
