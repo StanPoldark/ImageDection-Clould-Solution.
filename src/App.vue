@@ -51,7 +51,6 @@ Amplify.configure(awsmobile);
 
 
 </script>
-
 <template>
   <main>
     <authenticator  :sign-up-attributes="['given_name', 'family_name']">
