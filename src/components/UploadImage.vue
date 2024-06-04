@@ -14,18 +14,6 @@
 
 <script>
 import axios from 'axios';
-import { Auth } from 'aws-amplify';
-
-async function getToken() {
-  try {
-    const session = await Auth.currentSession();  // 获取当前会话
-    const token = session.getIdToken().getJwtToken();  // 获取 ID 令牌
-    return token;
-  } catch (error) {
-    console.error('Error getting the token: ', error);
-  }
-}
-
 
 export default {
   name: 'UploadImage',
@@ -49,7 +37,7 @@ export default {
     },
     uploadFile() {
       if (!this.file) return;
-      console.log(getToken());
+      const token = localStorage.getItem('userToken');
       this.convertImageToBase64(this.file, (base64String) => {
         axios.post('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/upload', { 
              image: base64String  
