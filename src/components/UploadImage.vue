@@ -42,7 +42,6 @@ export default {
     const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.accessToken$/;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
-      console.log(key);
       if (key && regex.test(key)) {
         return localStorage.getItem(key);
       }
