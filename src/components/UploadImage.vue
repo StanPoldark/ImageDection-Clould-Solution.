@@ -49,6 +49,7 @@ export default {
   },
   uploadFile() {
     if (!this.file) return;
+    
     const token = this.getAccessTokenFromLocalStorage();
     this.convertImageToBase64(this.file, (base64String) => {
       axios.post('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/upload', { 
