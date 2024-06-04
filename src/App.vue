@@ -51,13 +51,14 @@ const awsmobile = {
 Amplify.configure(awsmobile);
 // Function to fetch access token from local storage with explicit return type
 function getAccessTokenFromLocalStorage(): string | null {
+    const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.accessToken$/;
     for (let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if (key && /accessToken/.test(key)) {
+        if (key && regex.test(key)) {
             return localStorage.getItem(key);
         }
     }
-    return null; // If no matching key is found, return null
+    return null;
 }
 
 const accessToken = getAccessTokenFromLocalStorage();
