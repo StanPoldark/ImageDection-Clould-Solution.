@@ -42,7 +42,7 @@ export default {
   },
   methods: {
   fetchTags() {
-    axios.get('https://vz55txf0b6.execute-api.us-east-1.amazonaws.com/Prod/api/tags', {
+    axios.get('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/tags', {
       headers: {
         'Content-Type': 'application/json'
       }
