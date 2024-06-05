@@ -3,6 +3,7 @@ import UploadView from '../components/UploadImage.vue'
 import QueryView from '../components/TagQuery.vue'
 import FindImgByTagsView from '../components/FindImgByTags.vue'
 import FindImgByThumbnailUrlView from '../components/FindImgByThumbnailUrl.vue'
+import EditTagsView from '../components/EditTags.vue'
 
 import SnsView from '../components/SNS.vue'
 const router = createRouter({
@@ -22,6 +23,9 @@ const router = createRouter({
         },{
             path: '/findImgByThumbnailUrl',
             component: FindImgByThumbnailUrlView
+        },{
+            path: '/editTags',
+            component: EditTagsView
         },
         {
             path: '/sns',
