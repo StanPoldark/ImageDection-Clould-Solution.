@@ -38,14 +38,9 @@ export default {
     },
     methods: {
         submit() {
-            this.tags.forEach(e => {
-                console.log(e.tag + " " + e.count)
-            });
             console.log(this.tags)
-            console.log(JSON.stringify(this.tags))
-            // console.log(this.count)
             const token = this.getAccessTokenFromLocalStorage();
-            // console.log(token);
+            
             var api = 'https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/findByTags'
             axios.post(api, {
                 tags: this.tags
