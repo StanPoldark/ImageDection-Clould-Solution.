@@ -39,73 +39,75 @@ export default {
     const selectedItems = ref([]);
     const drag = ref(false);
 
+    const getAccessTokenFromLocalStorage = () => {
+      const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && regex.test(key)) {
+          return localStorage.getItem(key);
+        }
+      }
+      return null;
+    };
+
     const fetchTags = () => {
-      const token = this.getAccessTokenFromLocalStorage();
+      const token = getAccessTokenFromLocalStorage();
+      if (!token) {
+        console.error('No authentication token found');
+        return;
+      }
       axios.get('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/tags', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       })
-        .then(response => {
-          try {
-            const tags = JSON.parse(response.data.body);
-            items.value = tags.map((tag, index) => ({
-              name: tag,
-              id: index
-            }));
-          } catch (error) {
-            console.error('Error parsing JSON:', error);
-          }
-        })
-        .catch(error => console.error('Error fetching tags:', error));
+      .then(response => {
+        const tags = response.data;  // Assuming response.data directly contains the tags array
+        console.log(tags.body);
+        items.value = JSON.parse(tags.body).map((tag, index) => ({ name: tag, id: index }));
+      })
+      .catch(error => console.error('Error fetching tags:', error));
     };
+
     onMounted(fetchTags);
 
-    return {
-      items,
-      selectedItems,
-      drag
-    };
-  },
-  methods: {
-    subscribeTags() {
-      const token = this.getAccessTokenFromLocalStorage();
-      const data = jwtDecode(token); 
+    const subscribeTags = () => {
+      const token = getAccessTokenFromLocalStorage();
       if (!token) {
         alert('Authentication data is missing.');
-        return; // Stop execution if there is no user data.
+        return;
       }
+      const data = jwtDecode(token);
       axios.post('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/subscribe', {
         user_id: data.sub,
         email: data.email,
-        tags: this.selectedItems.map(item => item.name)  // Ensure this.selectedItems is correctly referenced.
+        tags: selectedItems.value.map(item => item.name)
       }, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
-      }).then(response => {
-        console.log('Successfully subscribed to tags');
-        alert("Successfully subscribed to tags"); // Correct way to display an alert after a successful operation.
-      }).catch(error => {
+      })
+      .then(() => {
+        alert("Successfully subscribed to tags");
+      })
+      .catch(error => {
         console.error('Error during subscription:', error);
         alert('Failed to subscribe to tags. Please check the console for more details.');
-      })},
-        getAccessTokenFromLocalStorage() {
-        const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
-        for (let i = 0; i < localStorage.length; i++) {
-          const key = localStorage.key(i);
-          if (key && regex.test(key)) {
-            return localStorage.getItem(key);
-          }
-        }
-        return null;
-      },
-    }
-  }
-</script>
+      });
+    };
 
+    return {
+      items,
+      selectedItems,
+      drag,
+      fetchTags,
+      subscribeTags
+    };
+  }
+}
+</script>
 <style>
 .tags-container {
   display: flex;
