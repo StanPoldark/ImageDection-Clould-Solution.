@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: '/query',
       component: QueryView
-    }
+    },
     {
       path: '/sns',
       component: SnsView
