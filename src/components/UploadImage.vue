@@ -3,12 +3,6 @@
     <h1>Upload Image</h1>
     <input type="file" @change="onFileChange" />
     <button :disabled="!file" @click="uploadFile">Upload</button>
-    <div v-if="labels.length">
-      <h2>Detected Labels:</h2>
-      <ul>
-        <li v-for="label in labels" :key="label.Name">{{ label.Name }} ({{ label.Confidence.toFixed(2) }}%)</li>
-      </ul>
-    </div>
   </div>
 </template>
 
@@ -22,7 +16,6 @@ export default {
   data() {
     return {
       file: null,
-      labels: []
     };
   },
   methods: {

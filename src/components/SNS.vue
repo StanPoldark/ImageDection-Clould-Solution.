@@ -20,6 +20,7 @@
       </div>
     </div>
   </div>
+  <button @click="subscribeTags">Subscribe</button>
 </template>
 
 <script>
@@ -82,6 +83,11 @@ export default {
       drag,
       handleDrag
     };
+  },
+  methods:{
+    subscribeTags(){
+      
+    }
   }
 }
 </script>
