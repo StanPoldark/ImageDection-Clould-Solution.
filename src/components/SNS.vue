@@ -48,7 +48,8 @@ export default {
       }
     })
     .then(response => {
-      this.items = response.data.map((tag, index) => ({
+      const tags = JSON.parse(response.data.body);
+      this.items = tags.map((tag, index) => ({
         name: tag,
         id: index
       }));
