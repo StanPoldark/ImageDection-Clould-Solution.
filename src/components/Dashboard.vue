@@ -3,7 +3,6 @@
     <nav class="top-nav">
       <RouterLink to="/" class="nav-link">Home</RouterLink>
       <RouterLink to="/upload" class="nav-link">Upload</RouterLink>
-      <RouterLink to="/query" class="nav-link">Query</RouterLink>
       <RouterLink to="/findImgByTags" class="nav-link">Find By Tags</RouterLink>
       <RouterLink to="/findImgByThumbnailUrl" class="nav-link">Find By Thumbnail</RouterLink>
     </nav>
