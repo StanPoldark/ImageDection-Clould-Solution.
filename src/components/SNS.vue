@@ -94,8 +94,8 @@ export default {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key && regex.test(key)) {
-        console.log(jwtDecode(localStorage.getItem(key)));
-        return  jwtDecode(localStorage.getItem(key));
+        console.log(jwtDecode.default(localStorage.getItem(key)));
+        return  jwtDecode.default(localStorage.getItem(key));
       }
     }
     return null;
