@@ -41,21 +41,21 @@ export default {
     this.fetchTags();
   },
   methods: {
-    fetchTags() {
-      axios.get('https://vz55txf0b6.execute-api.us-east-1.amazonaws.com/Prod/tags')
-        .then(response => {
-          this.items = response.data.map((tag, index) => ({
-            name: tag,
-            id: index
-          }));
-        }, {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .catch(error => console.error('Error fetching tags:', error));
-    }
+  fetchTags() {
+    axios.get('https://vz55txf0b6.execute-api.us-east-1.amazonaws.com/Prod/api/tags', {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => {
+      this.items = response.data.map((tag, index) => ({
+        name: tag,
+        id: index
+      }));
+    })
+    .catch(error => console.error('Error fetching tags:', error));
   }
+}
 }
 </script>
 
