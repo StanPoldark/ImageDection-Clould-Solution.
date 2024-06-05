@@ -4,6 +4,7 @@
     <RouterLink to="/">Go to Home</RouterLink>
     <RouterLink to="/upload">Go to Upload</RouterLink>
     <RouterLink to="/query">Go to Query</RouterLink>
+    <RouterLink to="/FindImgByTags">Find Image By Tags</RouterLink>
   </nav>
     <router-view />
   </div>
