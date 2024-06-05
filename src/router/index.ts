@@ -4,6 +4,7 @@ import FindImgByTagsView from '../components/FindImgByTags.vue'
 import FindImgByThumbnailUrlView from '../components/FindImgByThumbnailUrl.vue'
 import EditTagsView from '../components/EditTags.vue'
 import DeleteImagesView from '../components/DeleteImages.vue'
+import FindSimilarImageView from '../components/FindSimilarImage.vue'
 
 import SnsView from '../components/SNS.vue'
 const router = createRouter({
@@ -25,6 +26,9 @@ const router = createRouter({
         }, {
             path: '/deleteImages',
             component: DeleteImagesView
+        }, {
+            path: '/findSimilarImage',
+            component: FindSimilarImageView
         },
         {
             path: '/sns',

@@ -7,6 +7,8 @@
     <RouterLink to="/findImgByTags">Find Image By Tags</RouterLink>
     <RouterLink to="/findImgByThumbnailUrl">Find Image By Thumbnail URL</RouterLink>
     <RouterLink to="/editTags">Edit Tags</RouterLink>
+    <RouterLink to="/deleteImages">Delete Images</RouterLink>
+    <RouterLink to="/findSimilarImage">Find Similar Images</RouterLink>
     <RouterLink to="/sns">Go to Subscribe Tags</RouterLink>
   </nav>
     <router-view />
