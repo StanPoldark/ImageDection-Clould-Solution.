@@ -64,3 +64,39 @@ export default {
 }
 }
 </script>
+
+<style scoped>
+h1 {
+  text-align: center;
+  color: #4A90E2;
+}
+
+input[type="file"] {
+  display: block;
+  margin: 20px auto;
+  width: 80%;
+}
+
+button {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 12px 0;
+  background-color: #5CB85C; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+button:disabled {
+  background-color: #CCCCCC; 
+  cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+  background-color: #4CAE4C;
+}
+</style>

@@ -127,24 +127,53 @@ export default {
 </script>
 
 <style scoped>
-input,
-select {
-    padding: 10px;
-    margin: 10px;
+input, select {
+    padding: 12px 20px;
+    margin: 8px 0;
+    width: 100%; /* Ensures input takes full width */
+    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    border: 1px solid #ccc;
+    border-radius: 4px; /* Rounded corners for aesthetics */
 }
 
 .urlInput {
-    width: 100%;
+    transition: border 0.3s ease-in-out; /* Smooth transition for focus */
+}
+
+.urlInput:focus, input:focus {
+    border-color: #4A90E2; /* Focus color to indicate active input */
 }
 
 button {
-    /* padding: 10px; */
-    margin: 10px;
+    background-color: #4A90E2; 
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease; 
 }
 
-/* nav a {
-  margin-right: 15px;
-  text-decoration: none;
-  color: #333;
-} */
+button:hover {
+    background-color: #357ABD; 
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.form-group span {
+    margin-left: auto; 
+}
+
+button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+}
+
+h2, h3 {
+    color: #333; 
+}
 </style>
