@@ -27,7 +27,7 @@
 import { ref, onMounted } from 'vue';
 import draggable from 'vuedraggable';
 import axios from 'axios';
-import * as jwtDecode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 export default {
   components: {
@@ -87,15 +87,27 @@ export default {
   },
   methods:{
     subscribeTags(){
-      const id =  this.getAccessTokenFromLocalStorage();
+      const data =  this.getAccessTokenFromLocalStorage();
+      axios.post('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/subscribe', { 
+           body: {
+            'user_id': data.sub,
+            'email': data.email,
+            tags: this.selectedItems.value.map(item => item.name)
+           }  
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => console.log(('Succssfuly:')))
+      .catch(error => console.error('Error fetching tags:', error));
     },
     getAccessTokenFromLocalStorage() {
     const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key && regex.test(key)) {
-        console.log(jwtDecode.default(localStorage.getItem(key)));
-        return  jwtDecode.default(localStorage.getItem(key));
+        return  jwtDecode(localStorage.getItem(key));
       }
     }
     return null;
