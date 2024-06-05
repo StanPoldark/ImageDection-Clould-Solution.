@@ -4,19 +4,19 @@
     <div class="tags-container">
       <div>
         <h3>Available Tags</h3>
-        <draggable v-model="availableTags" group="tags" class="drag-area">
-          <template #item="{ element }">
-            <div class="tag-item">{{ element }}</div>
-          </template>
-        </draggable>
+        <draggable v-model="items" group="people" @start="drag = true" @end="drag = false" item-key="id">
+      <template #item="{ element }">
+        <div>{{ element.name }}</div>
+      </template>
+    </draggable>
       </div>
       <div>
         <h3>Selected Tags</h3>
-        <draggable v-model="selectedTags" group="tags" class="drag-area">
-          <template #item="{ element }">
-            <div class="tag-item">{{ element }}</div>
-          </template>
-        </draggable>
+        <draggable v-model="items" group="people" @start="drag = true" @end="drag = false" item-key="id">
+      <template #item="{ element }">
+        <div>{{ element.name }}</div>
+      </template>
+    </draggable>
       </div>
     </div>
   </div>
@@ -31,35 +31,26 @@ export default {
   components: {
     draggable,
   },
-  setup() {
-    const availableTags = ref([]);
-    const selectedTags = ref([]);
-
-    onMounted(async () => {
-      axios.get('https://vz55txf0b6.execute-api.us-east-1.amazonaws.com/Prod/tags', {
-        headers: {
-          //'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        }
-      })
+  data() {
+    return {
+      items: [],
+      drag: false
+    };
+  },
+  mounted() {
+    this.fetchTags();
+  },
+  methods: {
+    fetchTags() {
+      axios.get('https://vz55txf0b6.execute-api.us-east-1.amazonaws.com/Prod/tags')
         .then(response => {
-          console.log('Tags fetched successfully:', response.data);
+          this.items = response.data.map((tag, index) => ({
+            name: tag,
+            id: index
+          }));
         })
-        .catch(error => {
-          if (error.response) {
-            // The server responded with a status code that falls out of the range of 2xx
-            console.error('Fetching tags failed:', error.response.data);
-          } else if (error.request) {
-            // The request was made but no response was received
-            console.error('No response received:', error.request);
-          } else {
-            // Something happened in setting up the request that triggered an Error
-            console.error('Error:', error.message);
-          }
-        });
-    });
-
-    return { availableTags, selectedTags };
+        .catch(error => console.error('Error fetching tags:', error));
+    }
   }
 }
 </script>
