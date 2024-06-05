@@ -10,7 +10,7 @@
           </template>
         </draggable>
       </div>
-      <button @click="subscribeTags()">Subscribe</button>
+      <button style="margin: auto 0;" @click="subscribeTags()">Subscribe</button>
       <div>
         <h3>Selected Tags</h3>
         <draggable v-model="selectedItems" group="tags" class="drag-area" item-key="id">
