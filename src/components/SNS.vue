@@ -27,6 +27,7 @@
 import { ref, onMounted } from 'vue';
 import draggable from 'vuedraggable';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 export default {
   components: {
@@ -93,8 +94,8 @@ export default {
     for (let i = 0; i < localStorage.length; i++) {
       const key = localStorage.key(i);
       if (key && regex.test(key)) {
-        console.log(localStorage.getItem(key).getJwtToken());
-        return localStorage.getItem(key).getJwtToken();
+        console.log(jwtDecode(localStorage.getItem(key)));
+        return  jwtDecode(localStorage.getItem(key));
       }
     }
     return null;
