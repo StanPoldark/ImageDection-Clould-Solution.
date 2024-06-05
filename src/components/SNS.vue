@@ -4,15 +4,16 @@
     <div class="tags-container">
       <div>
         <h3>Available Tags</h3>
-        <draggable v-model="items" group="tags" @change="handleDrag" class="drag-area">
+        <draggable v-model="items" group="tags" class="drag-area" item-key="id">
           <template #item="{ element }">
             <div class="tag-item">{{ element.name }}</div>
           </template>
         </draggable>
       </div>
+      <button @click="subscribeTags()">Subscribe</button>
       <div>
         <h3>Selected Tags</h3>
-        <draggable v-model="selectedItems" group="tags" @change="handleDrag" class="drag-area">
+        <draggable v-model="selectedItems" group="tags" class="drag-area" item-key="id">
           <template #item="{ element }">
             <div class="tag-item">{{ element.name }}</div>
           </template>
@@ -20,7 +21,7 @@
       </div>
     </div>
   </div>
-  <button @click="subscribeTags">Subscribe</button>
+
 </template>
 
 <script>
@@ -39,81 +40,70 @@ export default {
     const drag = ref(false);
 
     const fetchTags = () => {
+      const token = this.getAccessTokenFromLocalStorage();
       axios.get('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/tags', {
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       })
-      .then(response => {
-        try {
-          const tags = JSON.parse(response.data.body);
-          items.value = tags.map((tag, index) => ({
-            name: tag,
-            id: index
-          }));
-        } catch (error) {
-          console.error('Error parsing JSON:', error);
-        }
-      })
-      .catch(error => console.error('Error fetching tags:', error));
+        .then(response => {
+          try {
+            const tags = JSON.parse(response.data.body);
+            items.value = tags.map((tag, index) => ({
+              name: tag,
+              id: index
+            }));
+          } catch (error) {
+            console.error('Error parsing JSON:', error);
+          }
+        })
+        .catch(error => console.error('Error fetching tags:', error));
     };
-
-    const handleDrag = (event) => {
-      // This function is called whenever an item is dragged and dropped across lists
-      if (event.added) {
-        const newItem = event.added.element;
-        if (event.from === event.to) {
-          // Same list: no action needed
-        } else if (event.from === items.value) {
-          // From items to selectedItems
-          selectedItems.value.push(newItem);
-          items.value.splice(items.value.indexOf(newItem), 1);
-        } else {
-          // From selectedItems to items
-          items.value.push(newItem);
-          selectedItems.value.splice(selectedItems.value.indexOf(newItem), 1);
-        }
-      }
-    };
-
     onMounted(fetchTags);
 
     return {
       items,
       selectedItems,
-      drag,
-      handleDrag
+      drag
     };
   },
-  methods:{
-    subscribeTags(){
-      const data =  this.getAccessTokenFromLocalStorage();
-      axios.post('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/subscribe', { 
-           body: {
-            'user_id': data.sub,
-            'email': data.email,
-            tags: this.selectedItems.value.map(item => item.name)
-           }  
+  methods: {
+    subscribeTags() {
+      const token = this.getAccessTokenFromLocalStorage();
+      const data = jwtDecode(token); 
+      if (!token) {
+        alert('Authentication data is missing.');
+        return; // Stop execution if there is no user data.
+      }
+      axios.post('https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/subscribe', {
+        user_id: data.sub,
+        email: data.email,
+        tags: this.selectedItems.map(item => item.name)  // Ensure this.selectedItems is correctly referenced.
       }, {
         headers: {
+          'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
-      })
-      .then(response => console.log(('Succssfuly:')))
-      .catch(error => console.error('Error fetching tags:', error));
-    },
-    getAccessTokenFromLocalStorage() {
-    const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
-    for (let i = 0; i < localStorage.length; i++) {
-      const key = localStorage.key(i);
-      if (key && regex.test(key)) {
-        return  jwtDecode(localStorage.getItem(key));
-      }
+      }).then(response => {
+        console.log('Successfully subscribed to tags');
+        alert("Successfully subscribed to tags"); // Correct way to display an alert after a successful operation.
+      }).catch(error => {
+        console.error('Error during subscription:', error);
+        alert('Failed to subscribe to tags. Please check the console for more details.');
+      })},
+        getAccessTokenFromLocalStorage() {
+        const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
+        for (let i = 0; i < localStorage.length; i++) {
+          const key = localStorage.key(i);
+          if (key && regex.test(key)) {
+            return localStorage.getItem(key);
+          }
+        }
+        return null;
+      },
     }
-    return null;
-  },
   }
-}
 </script>
 
 <style>

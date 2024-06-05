@@ -4,7 +4,7 @@
     <div class="tags-container">
       <div>
         <h3>Available Tags</h3>
-        <draggable v-model="items" group="tags" @change="handleDrag" class="drag-area">
+        <draggable v-model="items" group="tags"  class="drag-area" item-key="id">
           <template #item="{ element }">
             <div class="tag-item">{{ element.name }}</div>
           </template>
@@ -12,7 +12,7 @@
       </div>
       <div>
         <h3>Selected Tags</h3>
-        <draggable v-model="selectedItems" group="tags" @change="handleDrag" class="drag-area">
+        <draggable v-model="selectedItems" group="tags" class="drag-area" item-key="id">
           <template #item="{ element }">
             <div class="tag-item">{{ element.name }}</div>
           </template>
@@ -56,31 +56,12 @@ export default {
       .catch(error => console.error('Error fetching tags:', error));
     };
 
-    const handleDrag = (event) => {
-      // This function is called whenever an item is dragged and dropped across lists
-      if (event.added) {
-        const newItem = event.added.element;
-        if (event.from === event.to) {
-          // Same list: no action needed
-        } else if (event.from === items.value) {
-          // From items to selectedItems
-          selectedItems.value.push(newItem);
-          items.value.splice(items.value.indexOf(newItem), 1);
-        } else {
-          // From selectedItems to items
-          items.value.push(newItem);
-          selectedItems.value.splice(selectedItems.value.indexOf(newItem), 1);
-        }
-      }
-    };
-
     onMounted(fetchTags);
 
     return {
       items,
       selectedItems,
       drag,
-      handleDrag
     };
   }
 }
