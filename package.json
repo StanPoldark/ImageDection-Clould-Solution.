@@ -17,9 +17,10 @@
     "@aws-amplify/ui-vue": "^4.2.8",
     "aws-amplify": "^6.3.4",
     "axios": "^1.7.2",
+    "jwt-decode": "^4.0.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@aws-amplify/backend": "^1.0.3",
