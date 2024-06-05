@@ -48,7 +48,11 @@ export default {
             name: tag,
             id: index
           }));
-        })
+        }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
         .catch(error => console.error('Error fetching tags:', error));
     }
   }
