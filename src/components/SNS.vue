@@ -86,7 +86,7 @@ export default {
   },
   methods:{
     subscribeTags(){
-      const id =  getAccessTokenFromLocalStorage();
+      const id =  this.getAccessTokenFromLocalStorage();
     },
     getAccessTokenFromLocalStorage() {
     const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
