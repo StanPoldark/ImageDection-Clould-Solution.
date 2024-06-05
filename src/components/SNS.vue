@@ -27,7 +27,7 @@
 import { ref, onMounted } from 'vue';
 import draggable from 'vuedraggable';
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
+const jwtDecode = require('jwt-decode').default;
 
 export default {
   components: {
