@@ -86,8 +86,19 @@ export default {
   },
   methods:{
     subscribeTags(){
-      
+      const id =  getAccessTokenFromLocalStorage();
+    },
+    getAccessTokenFromLocalStorage() {
+    const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i);
+      if (key && regex.test(key)) {
+        console.log(localStorage.getItem(key).getJwtToken());
+        return localStorage.getItem(key).getJwtToken();
+      }
     }
+    return null;
+  },
   }
 }
 </script>

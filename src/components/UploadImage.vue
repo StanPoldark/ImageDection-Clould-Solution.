@@ -42,7 +42,6 @@ export default {
   },
   uploadFile() {
     if (!this.file) return;
-
     const token = this.getAccessTokenFromLocalStorage();
     console.log(token);
     this.convertImageToBase64(this.file, (base64String) => {
