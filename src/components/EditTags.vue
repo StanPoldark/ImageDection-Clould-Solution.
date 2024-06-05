@@ -1,0 +1,150 @@
+<template>
+    <div>
+        <h2>Edit Tags</h2>
+
+        <form v-on:submit.prevent="submit">
+            <h3>Type</h3>
+            <div class="form-group">
+                <select v-model="type" required>
+                    <option disabled value="">Please select one</option>
+                    <option value="1">Add</option>
+                    <option value="0">Delete</option>
+                </select>
+            </div>
+
+            <h3>URLs</h3>
+            <div class="form-group" v-for="(input, k) in urls" :key="k">
+                <input type="text" class="form-control urlInput" placeholder="url" v-model="input.url" required>
+                <span>
+                    <button @click="removeUrl(k)" v-show="k || (!k && urls.length > 1)">Remove</button>
+                    <button @click="addUrl()" v-show="k == urls.length - 1">Add fields</button>
+                </span>
+            </div>
+
+            <h3>Tags</h3>
+            <div class="form-group" id="tagsInput" v-for="(input, k) in tags" :key="k">
+                <input type="text" class="form-control" placeholder="tag" v-model="input.tag" required>
+                <span>
+                    <button @click="removeTag(k)" v-show="k || (!k && tags.length > 1)">Remove</button>
+                    <button @click="addTag()" v-show="k == tags.length - 1">Add fields</button>
+                </span>
+            </div>
+            <button type="submit">Submit</button>
+
+        </form>
+    </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
+    name: 'FindImgByTags',
+    data() {
+        return {
+            tags: [{
+                tag: ''
+            }],
+            urls: [{
+                url: ''
+            }],
+            type: -1
+        }
+    },
+    methods: {
+        submit() {
+            console.log(this.tags)
+            console.log(this.urls)
+            console.log(this.type)
+
+            let data = {
+                "url": [],
+                "type": Number(this.type),
+                "tags": []
+            }
+
+            this.tags.forEach(obj => {
+                data.tags.push(obj.tag)
+            });
+
+            this.urls.forEach(obj => {
+                data.url.push(obj.url)
+            });
+
+            const token = this.getAccessTokenFromLocalStorage();
+            var api = 'https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/editTags'
+            axios.post(api, {
+                data: data
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    console.log('Upload successful:', response.data);
+                    let alertStr = "No images edited"
+                    let imagesEdited = response.data.imagesEdited
+
+                    if (imagesEdited.length > 0) {
+                        alertStr = "Images Edited:"
+                        imagesEdited.forEach(url => {
+                            alertStr += ('\n\n' + url);
+                        });
+                    }
+                    alert(alertStr);
+
+                })
+                .catch(error => {
+                    console.error('Upload failed:', error.response.data);
+                });
+
+        },
+        addTag() {
+            this.tags.push({ tag: '' });
+        },
+        removeTag(index) {
+            this.tags.splice(index, 1);
+        },
+        addUrl() {
+            this.urls.push({ url: '' });
+        },
+        removeUrl(index) {
+            this.urls.splice(index, 1);
+        },
+        getAccessTokenFromLocalStorage() {
+            const regex = /^CognitoIdentityServiceProvider\.[^.]+\.[^.]+\.idToken$/;
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key && regex.test(key)) {
+                    return localStorage.getItem(key);
+                }
+            }
+            return null;
+        }
+    }
+}
+</script>
+
+<style scoped>
+input,
+select {
+    padding: 10px;
+    margin: 10px;
+}
+
+.urlInput {
+    width: 100%;
+}
+
+button {
+    /* padding: 10px; */
+    margin: 10px;
+}
+
+/* nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #333;
+} */
+</style>
