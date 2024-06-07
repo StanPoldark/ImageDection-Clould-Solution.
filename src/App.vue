@@ -55,7 +55,7 @@ Amplify.configure(awsmobile);
   <main>
     <authenticator  :sign-up-attributes="['given_name', 'family_name']">
       <template v-slot="{ user, signOut }">
-        <h1>Hello, {{ user.signInDetails.loginId }}</h1>
+        <h1>Hello, {{  user.signInDetails.loginId || ""   }}</h1>
         <dashboard />
         <button @click="signOut">Sign Out</button>
       </template>
