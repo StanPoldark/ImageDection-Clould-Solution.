@@ -130,18 +130,18 @@ export default {
 input, select {
     padding: 12px 20px;
     margin: 8px 0;
-    width: 100%; /* Ensures input takes full width */
-    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    width: 100%; 
+    box-sizing: border-box;
     border: 1px solid #ccc;
-    border-radius: 4px; /* Rounded corners for aesthetics */
+    border-radius: 4px;
 }
 
 .urlInput {
-    transition: border 0.3s ease-in-out; /* Smooth transition for focus */
+    transition: border 0.3s ease-in-out;
 }
 
 .urlInput:focus, input:focus {
-    border-color: #4A90E2; /* Focus color to indicate active input */
+    border-color: #4A90E2; 
 }
 
 button {

@@ -102,10 +102,10 @@ export default {
 </script>
 <style scoped>
 input, select {
-    width: 100%; /* Ensure full width for better alignment */
+    width: 100%; 
     padding: 12px 20px;
     margin: 8px 0;
-    box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+    box-sizing: border-box; 
     border: 1px solid #ccc;
     border-radius: 4px;
 }
@@ -115,7 +115,7 @@ input, select {
 }
 
 .urlInput:focus {
-    border-color: #4A90E2; /* Focus color to indicate active input */
+    border-color: #4A90E2;
 }
 
 button {

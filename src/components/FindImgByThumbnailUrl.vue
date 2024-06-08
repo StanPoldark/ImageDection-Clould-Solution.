@@ -80,9 +80,5 @@ form {
     margin-left: 5%;
     margin-right: 5%
 }
-/* nav a {
-  margin-right: 15px;
-  text-decoration: none;
-  color: #333;
-} */
+
 </style>

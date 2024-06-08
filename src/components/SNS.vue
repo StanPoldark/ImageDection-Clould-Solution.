@@ -63,7 +63,7 @@ export default {
         }
       })
       .then(response => {
-        const tags = response.data;  // Assuming response.data directly contains the tags array
+        const tags = response.data;  
         console.log(tags.body);
         items.value = JSON.parse(tags.body).map((tag, index) => ({ name: tag, id: index }));
       })
