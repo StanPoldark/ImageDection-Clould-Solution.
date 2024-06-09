@@ -80,11 +80,9 @@ export default {
                 }
             })
                 .then(response => {
-                    alert('Upload successful');
-                    console.log('Upload successful');
+                    console.log('Update successful');
                     let alertStr = "No images edited"
-                    let imagesEdited = response.data.imagesEdited
-
+                    let imagesEdited =  JSON.parse(response.data.body).imagesEdited
                     if (imagesEdited.length > 0) {
                         alertStr = "Images Edited:"
                         imagesEdited.forEach(url => {
@@ -95,8 +93,8 @@ export default {
 
                 })
                 .catch(error => {
-                    alert('Upload failed');
-                    console.error('Upload failed');
+                    alert('Update failed');
+                    console.error('Upload failed',error);
                 });
 
         },
