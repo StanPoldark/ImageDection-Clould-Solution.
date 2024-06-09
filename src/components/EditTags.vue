@@ -37,7 +37,7 @@
 
 <script>
 import axios from 'axios';
-
+import { jwtDecode } from "jwt-decode";
 export default {
     name: 'FindImgByTags',
     data() {
@@ -58,6 +58,7 @@ export default {
             console.log(this.type)
             const token = this.getAccessTokenFromLocalStorage();
             const user_data = jwtDecode(token);
+            console.log(user_data.sub);
             let data = {
                 "url": [],
                 "type": Number(this.type),
