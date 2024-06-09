@@ -54,6 +54,7 @@ export default {
     methods: {
         submit() {
             const token = this.getAccessTokenFromLocalStorage();
+            const user_data = jwtDecode(token);
             let data = {
                 "url": [],
                 "type": Number(this.type),
