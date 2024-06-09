@@ -80,6 +80,7 @@ export default {
                 }
             })
                 .then(response => {
+                    alert('Upload successful');
                     console.log('Upload successful');
                     let alertStr = "No images edited"
                     let imagesEdited = response.data.imagesEdited
@@ -94,6 +95,7 @@ export default {
 
                 })
                 .catch(error => {
+                    alert('Upload failed');
                     console.error('Upload failed');
                 });
 
