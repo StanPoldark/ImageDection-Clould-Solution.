@@ -94,6 +94,7 @@ export default {
 
                 })
                 .catch(error => {
+                    console.log(error.response);
                     console.error('Upload failed:', error.response.data);
                 });
 
