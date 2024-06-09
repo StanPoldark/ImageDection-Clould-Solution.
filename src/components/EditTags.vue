@@ -53,12 +53,7 @@ export default {
     },
     methods: {
         submit() {
-            console.log(this.tags)
-            console.log(this.urls)
-            console.log(this.type)
             const token = this.getAccessTokenFromLocalStorage();
-            const user_data = jwtDecode(token);
-            console.log(user_data.sub);
             let data = {
                 "url": [],
                 "type": Number(this.type),
