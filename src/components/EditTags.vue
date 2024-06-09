@@ -56,11 +56,13 @@ export default {
             console.log(this.tags)
             console.log(this.urls)
             console.log(this.type)
-
+            const token = this.getAccessTokenFromLocalStorage();
+            const user_data = jwtDecode(token);
             let data = {
                 "url": [],
                 "type": Number(this.type),
-                "tags": []
+                "tags": [],
+                'user_id': user_data.sub
             }
 
             this.tags.forEach(obj => {
@@ -71,7 +73,6 @@ export default {
                 data.url.push(obj.url)
             });
 
-            const token = this.getAccessTokenFromLocalStorage();
             var api = 'https://7m6gw11u0l.execute-api.us-east-1.amazonaws.com/prod/api/editTags'
             axios.post(api, {
                 data: data
